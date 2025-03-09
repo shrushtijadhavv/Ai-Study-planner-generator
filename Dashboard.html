@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | AI Study Planner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style/Dashboard.css">
+    <link rel="stylesheet" href="style/notifications.css">
+</head>
+<body>
+    <div class="min-h-screen flex flex-col">
+        <!-- Navigation -->
+        <nav class="nav-main">
+            <div class="nav-container">
+                <div class="flex justify-between h-16">
+                    <div class="flex">
+                        <div class="flex-shrink-0 flex items-center">
+                            <img class="h-8 w-auto" src="https://ai-public.creatie.ai/gen_page/logo_placeholder.png" alt="Logo">
+                            <span class="ml-2 text-white font-semibold">AI Study Planner</span>
+                        </div>
+                        <div class="nav-links">
+                            <a href="dashboard.html" class="nav-link active">Dashboard</a>
+                            <a href="StudyPlan.html" class="nav-link">Study Plan</a>
+                            <a href="challenges.html" class="nav-link">Challenges</a>
+                            <a href="Resources.html" class="nav-link">Resources</a>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <button type="button" id="notificationBtn" aria-label="Notifications" class="relative">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge"></span>
+                        </button>
+                        <div class="ml-3 relative">
+                            <div>
+                                <button type="button" id="user-menu-button" class="user-avatar">
+                                    <img class="h-8 w-8 rounded-full" src="https://creatie.ai/ai/api/search-image?query=A professional headshot of a young business person with a friendly smile, wearing smart casual attire, against a neutral background. The lighting is soft and flattering, creating a welcoming and approachable appearance.&width=100&height=100&orientation=squarish&flag=145a28af-0603-4f77-b9d9-f3ac0751c14e&flag=7c89ec61-cb48-4cf9-b80a-0698d9e76ab1" alt="">
+                                </button>
+                            </div>
+                            <div id="user-menu" class="user-menu hidden" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                                <a href="Account.html" class="menu-item" role="menuitem">Your Profile</a>
+                                <a href="settings.html" class="menu-item" role="menuitem">Settings</a>
+                                <a href="SigninPage.html" class="menu-item" role="menuitem">Sign out</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="flex-1">
+            <div class="main-container">
+                <!-- Welcome Section -->
+                <div class="welcome-section">
+                    <h1 class="welcome-title" id="welcome-message">Welcome back, John!</h1>
+                    <p class="welcome-subtitle">Here's an overview of your study progress</p>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stats-card">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="stats-label">Study Hours</p>
+                                <p class="stats-value">12.5</p>
+                            </div>
+                            <div class="stats-icon custom-bg">
+                                <i class="fas fa-clock text-custom"></i>
+                            </div>
+                        </div>
+                        <div class="stats-trend">
+                            <div class="flex items-center">
+                                <span class="trend-up">
+                                    <i class="fas fa-arrow-up mr-1"></i>
+                                    8%
+                                </span>
+                                <span class="trend-label">vs last week</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stats-card">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="stats-label">Completed Tasks</p>
+                                <p class="stats-value">24</p>
+                            </div>
+                            <div class="stats-icon purple-bg">
+                                <i class="fas fa-tasks text-purple-500"></i>
+                            </div>
+                        </div>
+                        <div class="stats-trend">
+                            <div class="flex items-center">
+                                <span class="trend-up">
+                                    <i class="fas fa-arrow-up mr-1"></i>
+                                    12%
+                                </span>
+                                <span class="trend-label">vs last week</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stats-card">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="stats-label">Challenges</p>
+                                <p class="stats-value">3</p>
+                            </div>
+                            <div class="stats-icon yellow-bg">
+                                <i class="fas fa-trophy text-yellow-500"></i>
+                            </div>
+                        </div>
+                        <div class="stats-trend">
+                            <div class="flex items-center">
+                                <span class="trend-label">2 active, 1 completed</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stats-card">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="stats-label">Focus Score</p>
+                                <p class="stats-value">85%</p>
+                            </div>
+                            <div class="stats-icon blue-bg">
+                                <i class="fas fa-bullseye text-blue-500"></i>
+                            </div>
+                        </div>
+                        <div class="stats-trend">
+                            <div class="flex items-center">
+                                <span class="trend-down">
+                                    <i class="fas fa-arrow-down mr-1"></i>
+                                    3%
+                                </span>
+                                <span class="trend-label">vs last week</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content Sections -->
+                <div class="content-grid">
+                    <!-- Study Progress -->
+                    <div class="col-span-2">
+                        <div class="content-card h-full">
+                            <div class="card-header">
+                                <h2 class="card-title">Weekly Study Progress</h2>
+                                <div class="view-buttons">
+                                    <button id="weekly-view-btn" class="view-btn-active">Week</button>
+                                    <button id="monthly-view-btn" class="view-btn">Month</button>
+                                </div>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="studyProgressChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upcoming Tasks -->
+                    <div>
+                        <div class="content-card h-full">
+                            <div class="card-header">
+                                <h2 class="card-title">Upcoming Tasks</h2>
+                                <a href="StudyPlan.html" class="view-all">View All</a>
+                            </div>
+                            <div class="tasks-container">
+                                <div class="task-card">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="task-title">Math Assignment</h3>
+                                        <span class="due-today">Due Today</span>
+                                    </div>
+                                    <p class="task-desc">Complete calculus problems 1-10</p>
+                                    <div class="task-footer">
+                                        <span class="task-time">2:00 PM</span>
+                                        <button class="task-complete-btn">Mark Complete</button>
+                                    </div>
+                                </div>
+
+                                <div class="task-card">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="task-title">Physics Lab Report</h3>
+                                        <span class="due-tomorrow">Tomorrow</span>
+                                    </div>
+                                    <p class="task-desc">Write up results from experiment</p>
+                                    <div class="task-footer">
+                                        <span class="task-time">11:59 PM</span>
+                                        <button class="task-complete-btn">Mark Complete</button>
+                                    </div>
+                                </div>
+
+                                <div class="task-card">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="task-title">Programming Quiz</h3>
+                                        <span class="due-later">In 3 days</span>
+                                    </div>
+                                    <p class="task-desc">Review Python fundamentals</p>
+                                    <div class="task-footer">
+                                        <span class="task-time">10:00 AM</span>
+                                        <button class="task-complete-btn">Mark Complete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Access and Recommendations -->
+                <div class="content-grid mt-8">
+                    <!-- Study Recommendations -->
+                    <div class="col-span-2">
+                        <div class="content-card">
+                            <div class="card-header">
+                                <h2 class="card-title">Recommended Resources</h2>
+                                <a href="Resources.html" class="view-all">Browse All</a>
+                            </div>
+                            <div class="resources-grid">
+                                <div class="resource-card">
+                                    <div class="resource-icon blue">
+                                        <i class="fas fa-video text-blue-300 text-xl"></i>
+                                    </div>
+                                    <div class="resource-content">
+                                        <h3 class="resource-title">Calculus Fundamentals</h3>
+                                        <p class="resource-desc">Video series - 45 mins</p>
+                                        <a href="#" class="resource-link">Watch Now</a>
+                                    </div>
+                                </div>
+
+                                <div class="resource-card">
+                                    <div class="resource-icon purple">
+                                        <i class="fas fa-book text-purple-300 text-xl"></i>
+                                    </div>
+                                    <div class="resource-content">
+                                        <h3 class="resource-title">Python Programming</h3>
+                                        <p class="resource-desc">Interactive tutorial</p>
+                                        <a href="#" class="resource-link">Start Learning</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div>
+                        <div class="content-card">
+                            <h2 class="card-title mb-6">Quick Actions</h2>
+                            <div class="quick-actions">
+                                <a href="StudyPlan.html" class="quick-action-card">
+                                    <div class="quick-action-icon custom-bg">
+                                        <i class="fas fa-calendar-alt text-custom"></i>
+                                    </div>
+                                    <div class="quick-action-content">
+                                        <h3 class="quick-action-title">Create Study Session</h3>
+                                        <p class="quick-action-desc">Schedule your next study time</p>
+                                    </div>
+                                </a>
+
+                                <a href="challenges.html" class="quick-action-card">
+                                    <div class="quick-action-icon yellow-bg">
+                                        <i class="fas fa-trophy text-yellow-500"></i>
+                                    </div>
+                                    <div class="quick-action-content">
+                                        <h3 class="quick-action-title">Join Challenge</h3>
+                                        <p class="quick-action-desc">Compete with other students</p>
+                                    </div>
+                                </a>
+
+                                <a href="Resources.html" class="quick-action-card">
+                                    <div class="quick-action-icon blue-bg">
+                                        <i class="fas fa-search text-blue-500"></i>
+                                    </div>
+                                    <div class="quick-action-content">
+                                        <h3 class="quick-action-title">Find Resources</h3>
+                                        <p class="quick-action-desc">Discover learning materials</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="script/notifications.js"></script>
+    <script src="script/Dashboard.js"></script>
+</body>
+</html>

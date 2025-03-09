@@ -1,0 +1,123 @@
+/* Toggle Switch Styles */
+.toggle-checkbox:checked + .toggle-label {
+    background-color: #16BC88;
+}
+.toggle-label {
+    transition: background-color 0.2s ease;
+}
+.toggle-label:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+}
+.toggle-checkbox:checked + .toggle-label:before {
+    transform: translateX(24px);
+}
+
+/* Tab Navigation Styles */
+#profileTab, #notificationsTab, #calendarTab, #accountTab {
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+#profileTab:hover, #notificationsTab:hover, #calendarTab:hover, #accountTab:hover {
+    color: #16BC88;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .fixed.bottom-0 {
+        position: sticky;
+    }
+}
+
+/* Make the color and theme options interactive */
+.color-option:hover, .theme-option:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+}
+
+/* Notification Panel Styles */
+#notificationPanel {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.25);
+    border: 1px solid #4B5563;
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Notification Badge */
+#notificationBtn span {
+    transition: all 0.2s ease;
+}
+
+#notificationBtn:hover span {
+    transform: scale(1.2);
+}
+
+/* Notification Items */
+#notificationPanel .divide-y > div {
+    transition: background-color 0.2s ease;
+}
+
+#notificationPanel .divide-y > div:hover {
+    background-color: #4B5563;
+}
+
+/* Notification Action Buttons */
+#notificationPanel button {
+    transition: all 0.2s ease;
+}
+
+#notificationPanel button:hover {
+    color: #16BC88;
+}
+
+/* Notification Type Tags */
+#notificationPanel .rounded-full {
+    transition: all 0.2s ease;
+}
+
+#notificationPanel .rounded-full:hover {
+    transform: translateY(-1px);
+}
+
+/* Notification Empty State */
+#notificationPanel .text-center {
+    padding: 2rem 0;
+    color: #9CA3AF;
+}
+
+/* Notification Sound Test Button styles removed */
+
+/* Success Message Animation */
+.fixed.bottom-4.right-4 {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

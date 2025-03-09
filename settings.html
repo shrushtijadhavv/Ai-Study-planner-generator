@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | My Account</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://ai-public.creatie.ai/gen_page/tailwind-custom.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com/3.4.5?plugins=forms@0.5.7,typography@0.5.13,aspect-ratio@0.4.2,container-queries@0.1.1"></script>
+    <script src="https://ai-public.creatie.ai/gen_page/tailwind-config.min.js" data-color="#16BC88" data-border-radius="large"></script>
+    <link rel="stylesheet" href="style/settings.css">
+    <link rel="stylesheet" href="style/notifications.css">
+</head>
+<body class="bg-gray-900 font-[Inter]">
+    <div class="min-h-screen flex flex-col">
+        <nav class="bg-gray-800 border-b border-gray-700">
+            <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16">
+                    <div class="flex">
+                        <div class="flex-shrink-0 flex items-center">
+                            <img class="h-8 w-auto" src="https://ai-public.creatie.ai/gen_page/logo_placeholder.png" alt="Logo">
+                        </div>
+                        <div class="hidden md:flex md:items-center md:ml-6 space-x-4">
+                            <a href="settings.html" class="text-gray-300 hover:text-custom px-3 py-2 rounded-md text-sm font-medium">Settings</a>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <button type="button" id="notificationBtn" aria-label="Notifications" class="relative">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge"></span>
+                        </button>
+                        <div class="relative">
+                            <button type="button" id="profileDropdownBtn" class="flex items-center max-w-xs bg-gray-800 rounded-full focus:outline-none">
+                                <img class="h-8 w-8 rounded-full" src="https://creatie.ai/ai/api/search-image?query=A professional headshot of a young business person with a friendly smile, wearing smart casual attire, against a neutral background. The lighting is soft and flattering, creating a welcoming and approachable appearance.&width=100&height=100&orientation=squarish&flag=145a28af-0603-4f77-b9d9-f3ac0751c14e&flag=7c89ec61-cb48-4cf9-b80a-0698d9e76ab1" alt="">
+                            </button>
+                            <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-gray-700 ring-1 ring-black ring-opacity-5 z-10">
+                                <a href="Account.html" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-600">Your Profile</a>
+                                <a href="settings.html" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-600">Settings</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-600">Sign out</a>
+                            </div>
+                        </div>
+                        <button type="button" id="mobileMenuBtn" class="md:hidden bg-gray-700 p-2 rounded-md text-gray-400 hover:text-white">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile menu -->
+            <div id="mobileMenu" class="hidden md:hidden bg-gray-800 border-b border-gray-700">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <a href="settings.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Settings</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="flex-grow w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="mb-8">
+                <button id="backBtn" class="!rounded-button inline-flex items-center text-gray-300 hover:text-custom">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    <span>Back</span>
+                </button>
+                <h1 class="mt-4 text-2xl font-semibold text-white">Settings</h1>
+            </div>
+
+            <div class="bg-gray-800 shadow rounded-lg mb-8">
+                <div class="border-b border-gray-700 overflow-x-auto">
+                    <nav class="-mb-px flex">
+                        <a href="#profile" id="profileTab" class="w-1/4 py-4 px-1 text-center border-b-2 border-custom font-medium text-custom whitespace-nowrap">
+                            <i class="fas fa-user mr-2"></i><span class="hidden sm:inline">Profile</span>
+                        </a>
+                        <a href="#notifications" id="notificationsTab" class="w-1/4 py-4 px-1 text-center border-b-2 border-transparent font-medium text-gray-400 hover:text-gray-300 hover:border-gray-600 whitespace-nowrap">
+                            <i class="fas fa-bell mr-2"></i><span class="hidden sm:inline">Notifications</span>
+                        </a>
+                        <a href="#calendar" id="calendarTab" class="w-1/4 py-4 px-1 text-center border-b-2 border-transparent font-medium text-gray-400 hover:text-gray-300 hover:border-gray-600 whitespace-nowrap">
+                            <i class="fas fa-calendar mr-2"></i><span class="hidden sm:inline">Calendar</span>
+                        </a>
+                        <a href="#account" id="accountTab" class="w-1/4 py-4 px-1 text-center border-b-2 border-transparent font-medium text-gray-400 hover:text-gray-300 hover:border-gray-600 whitespace-nowrap">
+                            <i class="fas fa-shield-alt mr-2"></i><span class="hidden sm:inline">Account</span>
+                        </a>
+                    </nav>
+                </div>
+
+                <!-- Profile Tab Content -->
+                <div id="profileTabContent" class="p-6">
+                    <div class="space-y-8">
+                        <div>
+                            <div class="flex flex-col sm:flex-row items-start sm:items-center">
+                                <div class="relative">
+                                    <img id="profileImage" class="h-24 w-24 rounded-full" src="https://creatie.ai/ai/api/search-image?query=A professional headshot of a young business person with a friendly smile, wearing smart casual attire, against a neutral background. The lighting is soft and flattering, creating a welcoming and approachable appearance.&width=200&height=200&orientation=squarish&flag=f6395454-e638-49e7-8765-df305c4b9ce6&flag=c3977977-d19b-4cce-b934-30ad23a48ec9" alt="">
+                                    <button id="uploadProfilePicBtn" class="!rounded-button absolute bottom-0 right-0 bg-gray-700 border border-gray-600 rounded-full p-2 shadow-sm hover:bg-gray-600">
+                                        <i class="fas fa-camera text-gray-300"></i>
+                                    </button>
+                                    <input type="file" id="profilePicInput" class="hidden" accept="image/*">
+                                </div>
+                                <div class="sm:ml-6 mt-4 sm:mt-0">
+                                    <h3 class="text-lg font-medium text-white">Profile Photo</h3>
+                                    <p class="mt-1 text-sm text-gray-400">Upload a new photo or remove the current one</p>
+                                    <div class="mt-4 flex">
+                                        <button id="uploadBtn" class="!rounded-button mr-3 bg-custom text-white px-4 py-2 hover:bg-opacity-90">Upload</button>
+                                        <button id="removePhotoBtn" class="!rounded-button text-gray-300 bg-gray-700 border border-gray-600 px-4 py-2 hover:bg-gray-600">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                            <div class="sm:col-span-3">
+                                <label for="firstName" class="block text-sm font-medium text-gray-300">First name</label>
+                                <input type="text" id="firstName" class="mt-1 block w-full bg-gray-700 border-gray-600 text-white focus:border-custom focus:ring-custom" value="John">
+                            </div>
+
+                            <div class="sm:col-span-3">
+                                <label for="lastName" class="block text-sm font-medium text-gray-300">Last name</label>
+                                <input type="text" id="lastName" class="mt-1 block w-full bg-gray-700 border-gray-600 text-white focus:border-custom focus:ring-custom" value="Doe">
+                            </div>
+
+                            <div class="sm:col-span-4">
+                                <label for="email" class="block text-sm font-medium text-gray-300">Email address</label>
+                                <input type="email" id="email" class="mt-1 block w-full bg-gray-700 border-gray-600 text-white focus:border-custom focus:ring-custom" value="john.doe@example.com">
+                            </div>
+
+                            <div class="sm:col-span-3">
+                                <label for="language" class="block text-sm font-medium text-gray-300">Language</label>
+                                <select id="language" class="mt-1 block w-full bg-gray-700 border-gray-600 text-white focus:border-custom focus:ring-custom">
+                                    <option selected>English</option>
+                                    <option>Spanish</option>
+                                    <option>French</option>
+                                    <option>German</option>
+                                    <option>Chinese</option>
+                                    <option>Japanese</option>
+                                </select>
+                            </div>
+
+                            <div class="sm:col-span-3">
+                                <label for="timezone" class="block text-sm font-medium text-gray-300">Time Zone</label>
+                                <select id="timezone" class="mt-1 block w-full bg-gray-700 border-gray-600 text-white focus:border-custom focus:ring-custom">
+                                    <option selected>(GMT-08:00) Pacific Time</option>
+                                    <option>(GMT-07:00) Mountain Time</option>
+                                    <option>(GMT-06:00) Central Time</option>
+                                    <option>(GMT-05:00) Eastern Time</option>
+                                    <option>(GMT+00:00) UTC</option>
+                                    <option>(GMT+01:00) Central European Time</option>
+                                    <option>(GMT+08:00) China Standard Time</option>
+                                    <option>(GMT+09:00) Japan Standard Time</option>
+                                </select>
+                            </div>
+
+                            <div class="sm:col-span-6">
+                                <label for="bio" class="block text-sm font-medium text-gray-300">Bio</label>
+                                <textarea id="bio" rows="3" class="mt-1 block w-full bg-gray-700 border-gray-600 text-white focus:border-custom focus:ring-custom" placeholder="Tell us a little about yourself..."></textarea>
+                            </div>
+
+                            <div class="sm:col-span-6">
+                                <label for="learningGoals" class="block text-sm font-medium text-gray-300">Learning goals</label>
+                                <textarea id="learningGoals" rows="3" class="mt-1 block w-full bg-gray-700 border-gray-600 text-white focus:border-custom focus:ring-custom">I want to improve my programming skills and learn new technologies.</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notifications Tab Content -->
+                <div id="notificationsTabContent" class="p-6 hidden">
+                    <div class="space-y-6">
+                        <h3 class="text-lg font-medium text-white">Notification Preferences</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h4 class="text-gray-300 font-medium">Email Notifications</h4>
+                                    <p class="text-sm text-gray-400">Receive email updates about your account</p>
+                                </div>
+                                <div class="relative inline-block w-12 h-6 align-middle">
+                                    <input type="checkbox" id="emailToggle" class="hidden toggle-checkbox" checked>
+                                    <label for="emailToggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer"></label>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h4 class="text-gray-300 font-medium">Push Notifications</h4>
+                                    <p class="text-sm text-gray-400">Receive push notifications on your device</p>
+                                </div>
+                                <div class="relative inline-block w-12 h-6 align-middle">
+                                    <input type="checkbox" id="pushToggle" class="hidden toggle-checkbox" checked>
+                                    <label for="pushToggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer"></label>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h4 class="text-gray-300 font-medium">Course Updates</h4>
+                                    <p class="text-sm text-gray-400">Get notified about new content in your courses</p>
+                                </div>
+                                <div class="relative inline-block w-12 h-6 align-middle">
+                                    <input type="checkbox" id="courseToggle" class="hidden toggle-checkbox" checked>
+                                    <label for="courseToggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer"></label>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h4 class="text-gray-300 font-medium">Marketing Communications</h4>
+                                    <p class="text-sm text-gray-400">Receive updates about new features and promotions</p>
+                                </div>
+                                <div class="relative inline-block w-12 h-6 align-middle">
+                                    <input type="checkbox" id="marketingToggle" class="hidden toggle-checkbox">
+                                    <label for="marketingToggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer"></label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pt-4 border-t border-gray-700">
+                            <h3 class="text-lg font-medium text-white mb-4">Notification Categories</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h4 class="text-gray-300 font-medium">Assignment Deadlines</h4>
+                                        <p class="text-sm text-gray-400">Reminders about upcoming assignments</p>
+                                    </div>
+                                    <div class="relative inline-block w-12 h-6 align-middle">
+                                        <input type="checkbox" id="assignmentToggle" class="hidden toggle-checkbox" checked>
+                                        <label for="assignmentToggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer"></label>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h4 class="text-gray-300 font-medium">Study Reminders</h4>
+                                        <p class="text-sm text-gray-400">Reminders for scheduled study sessions</p>
+                                    </div>
+                                    <div class="relative inline-block w-12 h-6 align-middle">
+                                        <input type="checkbox" id="studyToggle" class="hidden toggle-checkbox" checked>
+                                        <label for="studyToggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer"></label>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h4 class="text-gray-300 font-medium">Exam Alerts</h4>
+                                        <p class="text-sm text-gray-400">Notifications about upcoming exams</p>
+                                    </div>
+                                    <div class="relative inline-block w-12 h-6 align-middle">
+                                        <input type="checkbox" id="examToggle" class="hidden toggle-checkbox" checked>
+                                        <label for="examToggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer"></label>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h4 class="text-gray-300 font-medium">Progress Updates</h4>
+                                        <p class="text-sm text-gray-400">Weekly summaries of your learning progress</p>
+                                    </div>
+                                    <div class="relative inline-block w-12 h-6 align-middle">
+                                        <input type="checkbox" id="progressNotifToggle" class="hidden toggle-checkbox" checked>
+                                        <label for="progressNotifToggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pt-4 border-t border-gray-700">
+                            <h3 class="text-lg font-medium text-white mb-4">Notification Frequency</h3>
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <input id="freq-realtime" name="notification-frequency" type="radio" checked class="h-4 w-4 text-custom focus:ring-custom bg-gray-700 border-gray-600">
+                                    <label for="freq-realtime" class="ml-3 text-gray-300">
+                                        Real-time
+                                    </label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="freq-daily" name="notification-frequency" type="radio" class="h-4 w-4 text-custom focus:ring-custom bg-gray-700 border-gray-600">
+                                    <label for="freq-daily" class="ml-3 text-gray-300">
+                                        Daily digest
+                                    </label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="freq-weekly" name="notification-frequency" type="radio" class="h-4 w-4 text-custom focus:ring-custom bg-gray-700 border-gray-600">
+                                    <label for="freq-weekly" class="ml-3 text-gray-300">
+                                        Weekly digest
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pt-4 border-t border-gray-700">
+                            <h3 class="text-lg font-medium text-white mb-4">Quiet Hours</h3>
+                            <div class="mt-4">
+                                <div class="flex items-center">
+                                    <input id="quiet-hours-toggle" type="checkbox" class="h-4 w-4 text-custom focus:ring-custom bg-gray-700 border-gray-600">
+                                    <label for="quiet-hours-toggle" class="ml-3 text-gray-300">
+                                        Enable quiet hours
+                                    </label>
+                                </div>
+                                <div class="mt-3 grid grid-cols-1 gap-y-4 gap-x-4 sm:grid-cols-6">
+                                    <div class="sm:col-span-3">
+                                        <label for="quietHoursStart" class="block text-sm font-medium text-gray-300">Start time</label>
+                                        <input type="time" id="quietHoursStart" class="mt-1 block w-full bg-gray-700 border-gray-600 text-white focus:border-custom focus:ring-custom" value="22:00">
+                                    </div>
+                                    <div class="sm:col-span-3">
+                                        <label for="quietHoursEnd" class="block text-sm font-medium text-gray-300">End time</label>
+                                        <input type="time" id="quietHoursEnd" class="mt-1 block w-full bg-gray-700 border-gray-600 text-white focus:border-custom focus:ring-custom" value="07:00">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calendar Tab Content -->
+                <div id="calendarTabContent" class="p-6 hidden">
+                    <div class="space-y-6">
+                        <h3 class="text-lg font-medium text-white">Calendar Settings</h3>
+                        
+                    </div>
+                    <script src="https://apis.google.com/js/api.js"></script>
+                    <script type="module" src="script/auth-config.js"></script>
+                    <script type="module" src="script/settings.js"></script>
+                </body> 
+                
+                <div class="space-y-4">
+                    <div class="flex items-start sm:items-center justify-between flex-col sm:flex-row">
+                        <div>
+                            <h4 class="text-gray-300 font-medium">Google Calendar</h4>
+                            <p class="text-sm text-gray-400 mb-2 sm:mb-0">Sync your schedule with Google Calendar</p>
+                        </div>
+                        <div id="googleCalendarStatus">
+                            <button id="connectGoogleCalendarBtn" class="!rounded-button px-4 py-2 bg-custom text-white hover:bg-opacity-90">Connect</button>
+                        </div>
+                    </div>
+                </div> 
+                        
+                        <div class="pt-4 border-t border-gray-700">
+                            <h3 class="text-lg font-medium text-white mb-4">Default Calendar View</h3>
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <input id="view-month" name="calendar-view" type="radio" checked class="h-4 w-4 text-custom focus:ring-custom bg-gray-700 border-gray-600">
+                                    <label for="view-month" class="ml-3 text-gray-300">
+                                        Month
+                                    </label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="view-week" name="calendar-view" type="radio" class="h-4 w-4 text-custom focus:ring-custom bg-gray-700 border-gray-600">
+                                    <label for="view-week" class="ml-3 text-gray-300">
+                                        Week
+                                    </label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="view-day" name="calendar-view" type="radio" class="h-4 w-4 text-custom focus:ring-custom bg-gray-700 border-gray-600">
+                                    <label for="view-day" class="ml-3 text-gray-300">
+                                        Day
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pt-4 border-t border-gray-700">
+                            <h3 class="text-lg font-medium text-white mb-4">Calendar Reminders</h3>
+                            <div class="grid grid-cols-1 gap-y-4 sm:grid-cols-6">
+                                <div class="sm:col-span-3">
+                                    <label for="reminderTime" class="block text-sm font-medium text-gray-300">Default Reminder Time</label>
+                                    <select id="reminderTime" class="mt-1 block w-full bg-gray-700 border-gray-600 text-white focus:border-custom focus:ring-custom">
+                                        <option>10 minutes before</option>
+                                        <option selected>15 minutes before</option>
+                                        <option>30 minutes before</option>
+                                        <option>1 hour before</option>
+                                        <option>1 day before</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pt-4 border-t border-gray-700">
+                            <h3 class="text-lg font-medium text-white mb-4">Study Schedule Settings</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h4 class="text-gray-300 font-medium">Auto-schedule Study Sessions</h4>
+                                        <p class="text-sm text-gray-400">Automatically schedule study sessions based on your availability</p>
+                                    </div>
+                                    <div class="relative inline-block w-12 h-6 align-middle">
+                                        <input type="checkbox" id="autoScheduleToggle" class="hidden toggle-checkbox" checked>
+                                        <label for="autoScheduleToggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer"></label>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-gray-300 font-medium mb-2">Preferred Study Hours</h4>
+                                    <div class="grid grid-cols-1 gap-y-4 gap-x-4 sm:grid-cols-6">
+                                        <div class="sm:col-span-3">
+                                            <label for="studyHoursStart" class="block text-sm font-medium text-gray-300">Start time</label>
+                                            <input type="time" id="studyHoursStart" class="mt-1 block w-full bg-gray-700 border-gray-600 text-white focus:border-custom focus:ring-custom" value="09:00">
+                                        </div>
+                                        <div class="sm:col-span-3">
+                                            <label for="studyHoursEnd" class="block text-sm font-medium text-gray-300">End time</label>
+                                            <input type="time" id="studyHoursEnd" class="mt-1 block w-full bg-gray-700 border-gray-600 text-white focus:border-custom focus:ring-custom" value="18:00">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-gray-300 font-medium mb-2">Study Session Duration</h4>
+                                    <div class="grid grid-cols-1 gap-y-4 sm:grid-cols-6">
+                                        <div class="sm:col-span-3">
+                                            <select id="sessionDuration" class="mt-1 block w-full bg-gray-700 border-gray-600 text-white focus:border-custom focus:ring-custom">
+                                                <option>25 minutes (Pomodoro)</option>
+                                                <option selected>45 minutes</option>
+                                                <option>60 minutes</option>
+                                                <option>90 minutes</option>
+                                                <option>120 minutes</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-gray-300 font-medium mb-2">Break Duration</h4>
+                                    <div class="grid grid-cols-1 gap-y-4 sm:grid-cols-6">
+                                        <div class="sm:col-span-3">
+                                            <select id="breakDuration" class="mt-1 block w-full bg-gray-700 border-gray-600 text-white focus:border-custom focus:ring-custom">
+                                                <option>5 minutes</option>
+                                                <option selected>10 minutes</option>
+                                                <option>15 minutes</option>
+                                                <option>20 minutes</option>
+                                                <option>30 minutes</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pt-4 border-t border-gray-700">
+                            <h3 class="text-lg font-medium text-white mb-4">Exam Preparation</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h4 class="text-gray-300 font-medium">Exam Countdown</h4>
+                                        <p class="text-sm text-gray-400">Show countdown to upcoming exams</p>
+                                    </div>
+                                    <div class="relative inline-block w-12 h-6 align-middle">
+                                        <input type="checkbox" id="examCountdownToggle" class="hidden toggle-checkbox" checked>
+                                        <label for="examCountdownToggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer"></label>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h4 class="text-gray-300 font-medium">Intensive Study Mode</h4>
+                                        <p class="text-sm text-gray-400">Automatically increase study sessions before exams</p>
+                                    </div>
+                                    <div class="relative inline-block w-12 h-6 align-middle">
+                                        <input type="checkbox" id="intensiveStudyToggle" class="hidden toggle-checkbox" checked>
+                                        <label for="intensiveStudyToggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer"></label>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-gray-300 font-medium mb-2">Exam Preparation Start</h4>
+                                    <div class="grid grid-cols-1 gap-y-4 sm:grid-cols-6">
+                                        <div class="sm:col-span-3">
+                                            <select id="examPrepStart" class="mt-1 block w-full bg-gray-700 border-gray-600 text-white focus:border-custom focus:ring-custom">
+                                                <option>1 week before</option>
+                                                <option selected>2 weeks before</option>
+                                                <option>3 weeks before</option>
+                                                <option>1 month before</option>
+                                                <option>2 months before</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Tab Content -->
+                <div id="accountTabContent" class="p-6 hidden">
+                    <div class="space-y-6">
+                        <h3 class="text-lg font-medium text-white">Account Settings</h3>
+                        
+                        <div class="pt-4">
+                            <h4 class="text-gray-300 font-medium mb-4">Change Password</h4>
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="currentPassword" class="block text-sm font-medium text-gray-300">Current Password</label>
+                                    <input type="password" id="currentPassword" class="mt-1 block w-full bg-gray-700 border-gray-600 text-white focus:border-custom focus:ring-custom">
+                                </div>
+                                <div>
+                                    <label for="newPassword" class="block text-sm font-medium text-gray-300">New Password</label>
+                                    <input type="password" id="newPassword" class="mt-1 block w-full bg-gray-700 border-gray-600 text-white focus:border-custom focus:ring-custom">
+                                    <div id="passwordStrength" class="mt-2 hidden">
+                                        <div class="flex items-center space-x-2">
+                                            <div class="h-1 flex-1 bg-gray-600 rounded-full overflow-hidden">
+                                                <div id="passwordStrengthBar" class="h-full bg-red-500 transition-all duration-300"></div>
+                                            </div>
+                                            <span id="passwordStrengthText" class="text-xs text-red-500">Weak</span>
+                                        </div>
+                                        <ul class="mt-2 text-xs text-gray-400 space-y-1">
+                                            <li id="lengthCheck" class="flex items-center">
+                                                <i class="fas fa-times-circle mr-2 text-red-500"></i>
+                                                <span>At least 8 characters</span>
+                                            </li>
+                                            <li id="uppercaseCheck" class="flex items-center">
+                                                <i class="fas fa-times-circle mr-2 text-red-500"></i>
+                                                <span>At least 1 uppercase letter</span>
+                                            </li>
+                                            <li id="lowercaseCheck" class="flex items-center">
+                                                <i class="fas fa-times-circle mr-2 text-red-500"></i>
+                                                <span>At least 1 lowercase letter</span>
+                                            </li>
+                                            <li id="numberCheck" class="flex items-center">
+                                                <i class="fas fa-times-circle mr-2 text-red-500"></i>
+                                                <span>At least 1 number</span>
+                                            </li>
+                                            <li id="specialCheck" class="flex items-center">
+                                                <i class="fas fa-times-circle mr-2 text-red-500"></i>
+                                                <span>At least 1 special character</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="confirmPassword" class="block text-sm font-medium text-gray-300">Confirm New Password</label>
+                                    <input type="password" id="confirmPassword" class="mt-1 block w-full bg-gray-700 border-gray-600 text-white focus:border-custom focus:ring-custom">
+                                    <p id="passwordMatch" class="mt-1 text-xs text-red-500 hidden">Passwords do not match</p>
+                                </div>
+                                <button id="changePasswordBtn" class="!rounded-button px-4 py-2 bg-custom text-white hover:bg-opacity-90">Update Password</button>
+                            </div>
+                        </div>
+                        
+                        <div class="pt-4 border-t border-gray-700">
+                            <h4 class="text-gray-300 font-medium mb-4">Two-Factor Authentication</h4>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm text-gray-400">Add an extra layer of security to your account</p>
+                                </div>
+                                <div class="relative inline-block w-12 h-6 align-middle">
+                                    <input type="checkbox" id="twoFactorToggle" class="hidden toggle-checkbox">
+                                    <label for="twoFactorToggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer"></label>
+                                </div>
+                            </div>
+                            <div id="twoFactorOptions" class="mt-4 hidden">
+                                <div class="space-y-2">
+                                    <div class="flex items-center">
+                                        <input id="2fa-app" name="2fa-method" type="radio" checked class="h-4 w-4 text-custom focus:ring-custom bg-gray-700 border-gray-600">
+                                        <label for="2fa-app" class="ml-3 text-gray-300">
+                                            Authenticator app
+                                        </label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="2fa-sms" name="2fa-method" type="radio" class="h-4 w-4 text-custom focus:ring-custom bg-gray-700 border-gray-600">
+                                        <label for="2fa-sms" class="ml-3 text-gray-300">
+                                            SMS verification
+                                        </label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="2fa-email" name="2fa-method" type="radio" class="h-4 w-4 text-custom focus:ring-custom bg-gray-700 border-gray-600">
+                                        <label for="2fa-email" class="ml-3 text-gray-300">
+                                            Email verification
+                                        </label>
+                                    </div>
+                                </div>
+                                <div id="2faSetupContent" class="mt-4 p-4 bg-gray-700 rounded-lg hidden">
+                                    <!-- Content will be dynamically populated based on selected method -->
+                                </div>
+                                <button id="setup2FABtn" class="!rounded-button mt-4 px-4 py-2 bg-custom text-white hover:bg-opacity-90">Set Up</button>
+                            </div>
+                        </div>
+                        
+                        <div class="pt-4 border-t border-gray-700">
+                            <h4 class="text-gray-300 font-medium mb-4">Connected Accounts</h4>
+                            <p class="text-sm text-gray-400 mb-4">Connect your accounts to enable single sign-on and sync your data across platforms</p>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between bg-gray-700 p-4 rounded-lg">
+                                    <div class="flex items-center">
+                                        <i class="fab fa-google text-2xl text-gray-300 mr-3"></i>
+                                        <div>
+                                            <span class="text-gray-300 block">Google</span>
+                                            <span class="text-xs text-gray-400">Connect to sync calendar and import contacts</span>
+                                        </div>
+                                    </div>
+                                    <div id="googleConnectionStatus">
+                                        <button id="connectGoogleBtn" class="!rounded-button px-4 py-2 text-gray-300 bg-gray-700 border border-gray-600 hover:bg-gray-600">Connect</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center justify-between bg-gray-700 p-4 rounded-lg">
+                                    <div class="flex items-center">
+                                        <i class="fab fa-github text-2xl text-gray-300 mr-3"></i>
+                                        <div>
+                                            <span class="text-gray-300 block">GitHub</span>
+                                            <span class="text-xs text-gray-400">Connect to access coding assignments and projects</span>
+                                        </div>
+                                    </div>
+                                    <div id="githubConnectionStatus">
+                                        <button id="connectGithubBtn" class="!rounded-button px-4 py-2 text-gray-300 bg-gray-700 border border-gray-600 hover:bg-gray-600">Connect</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center justify-between bg-gray-700 p-4 rounded-lg">
+                                    <div class="flex items-center">
+                                        <i class="fab fa-linkedin text-2xl text-gray-300 mr-3"></i>
+                                        <div>
+                                            <span class="text-gray-300 block">LinkedIn</span>
+                                            <span class="text-xs text-gray-400">Connect to share achievements and certificates</span>
+                                        </div>
+                                    </div>
+                                    <div id="linkedinConnectionStatus">
+                                        <button id="connectLinkedinBtn" class="!rounded-button px-4 py-2 text-gray-300 bg-gray-700 border border-gray-600 hover:bg-gray-600">Connect</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pt-4 border-t border-gray-700">
+                            <h4 class="text-gray-300 font-medium mb-4">Data & Privacy</h4>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm text-gray-400">Download a copy of your data</p>
+                                    </div>
+                                    <button id="downloadDataBtn" class="!rounded-button px-4 py-2 text-gray-300 bg-gray-700 border border-gray-600 hover:bg-gray-600">Download</button>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm text-gray-400">Delete your account</p>
+                                    </div>
+                                    <button id="deleteAccountBtn" class="!rounded-button px-4 py-2 text-white bg-red-600 hover:bg-red-700">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 shadow rounded-lg">
+                <div class="p-6">
+                    <h3 class="text-lg font-medium text-white mb-4">Preferences</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h4 class="text-gray-300 font-medium">Show course progress</h4>
+                                <p class="text-sm text-gray-400">Display your progress on the dashboard</p>
+                            </div>
+                            <div class="relative inline-block w-12 h-6 align-middle">
+                                <input type="checkbox" id="progressToggle" class="hidden toggle-checkbox" checked>
+                                <label for="progressToggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer"></label>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h4 class="text-gray-300 font-medium">Enable desktop notifications</h4>
+                                <p class="text-sm text-gray-400">Receive notifications while using the browser</p>
+                            </div>
+                            <div class="relative inline-block w-12 h-6 align-middle">
+                                <input type="checkbox" id="desktopNotifToggle" class="hidden toggle-checkbox" checked>
+                                <label for="desktopNotifToggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer"></label>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h4 class="text-gray-300 font-medium">Auto-play videos</h4>
+                                <p class="text-sm text-gray-400">Automatically play videos in courses</p>
+                            </div>
+                            <div class="relative inline-block w-12 h-6 align-middle">
+                                <input type="checkbox" id="autoplayToggle" class="hidden toggle-checkbox">
+                                <label for="autoplayToggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer"></label>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h4 class="text-gray-300 font-medium">Show suggested courses</h4>
+                                <p class="text-sm text-gray-400">Display course recommendations based on your interests</p>
+                            </div>
+                            <div class="relative inline-block w-12 h-6 align-middle">
+                                <input type="checkbox" id="suggestionsToggle" class="hidden toggle-checkbox" checked>
+                                <label for="suggestionsToggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sticky bottom-0 inset-x-0 bg-gray-800 border-t border-gray-700 z-10">
+            <div class="w-full mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-end py-4 space-x-3">
+                    <button id="cancelBtn" class="!rounded-button px-4 py-2 text-gray-300 bg-gray-700 border border-gray-600 hover:bg-gray-600">Cancel</button>
+                    <button id="saveBtn" class="!rounded-button px-4 py-2 bg-custom text-white hover:bg-opacity-90">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://alcdn.msauth.net/browser/2.30.0/js/msal-browser.min.js"></script>
+    <script src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
+    <script type="module" src="script/auth-config.js"></script>
+    <script src="script/notifications.js"></script>
+    <script type="module" src="script/settings.js"></script>
+</body>
+</html>

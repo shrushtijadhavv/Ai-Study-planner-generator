@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome - Smart Study Planner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/css/glide.core.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/css/glide.theme.min.css" rel="stylesheet" />
+    <link href="https://ai-public.creatie.ai/gen_page/tailwind-custom.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/glide.min.js"></script>
+    <script
+        src="https://cdn.tailwindcss.com/3.4.5?plugins=forms@0.5.7,typography@0.5.13,aspect-ratio@0.4.2,container-queries@0.1.1"></script>
+    <script src="https://ai-public.creatie.ai/gen_page/tailwind-config.min.js" data-color="#000000"
+        data-border-radius="small"></script>
+</head>
+
+<body class="bg-gray-900 font-sans">
+    <div class="min-h-screen flex flex-col">
+
+        <div class="flex-1">
+            <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="max-w-md mx-auto">
+                    <div class="space-y-6">
+                        <form id="signup-form" class="space-y-6 bg-gray-800 p-8 rounded-2xl shadow-xl">
+
+
+
+
+                            <div>
+                                <h2 class="text-center text-3xl font-bold text-white">Create your account</h2>
+                                <p class="mt-2 text-center text-sm text-gray-400">
+                                    Welcome ! Lets get started with your account creation
+                                </p>
+                            </div>
+
+
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-300">Email address</label>
+                                <div class="mt-1 relative">
+                                    <input type="email" id="email" name="email" required=""
+                                        class="appearance-none block w-full px-4 py-3 border border-gray-700 rounded-full shadow-sm placeholder-gray-500 bg-gray-900 text-white focus:outline-none focus:ring-custom focus:border-custom sm:text-sm transition duration-200 hover:border-custom"
+                                        placeholder="Enter your email" />
+                                </div>
+                            </div>
+                            <div>
+                                <label for="password" class="block text-sm font-medium text-gray-300">Password</label>
+                                <div class="mt-1 relative">
+                                    <input type="password" id="password" name="password" required=""
+                                        class="appearance-none block w-full px-4 py-3 border border-gray-700 rounded-full shadow-sm placeholder-gray-500 bg-gray-900 text-white focus:outline-none focus:ring-custom focus:border-custom sm:text-sm transition duration-200 hover:border-custom"
+                                        placeholder="Create a password" />
+                                    <button type="button" id="toggle-password"
+                                        class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                        <i class="fas fa-eye text-gray-400"></i>
+                                    </button>
+
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="text-sm">
+                                    <p class="text-white" >Your password must meet the following requirements:
+
+                                        At least one uppercase letter (A-Z)
+                                        At least one lowercase letter (a-z)
+                                        At least one special character (e.g., @, #, $, !)
+                                        At least one numeric character (0-9)
+                                    </p>
+                                </div>
+                            </div>
+                            <button type="submit"
+                                class="w-full flex justify-center py-3 px-4 border border-transparent rounded-full shadow-lg text-sm font-medium text-white bg-custom hover:bg-custom focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom transition duration-200 transform hover:scale-[1.02]">Create
+                                Account</button>
+                        </form>
+                        <div class="flex items-center my-6">
+                            <div class="flex-1 border-t border-gray-700"></div>
+                            <div class="px-4 text-sm text-gray-400">or</div>
+                            <div class="flex-1 border-t border-gray-700"></div>
+                        </div>
+                        <button id="google-signin"
+                            class="w-full flex items-center justify-center px-4 py-3 border border-gray-700 shadow-lg rounded-full text-base font-medium bg-gray-800 hover:bg-gray-700 text-gray-300 transition duration-200 transform hover:scale-[1.02]">
+                            <img class="h-5 w-5 mr-2"
+                                src="data:image/svg+xml,%3Csvg viewBox=&#39;0 0 24 24&#39; xmlns=&#39;http://www.w3.org/2000/svg&#39;%3E%3Cpath fill=&#39;%234285F4&#39; d=&#39;M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z&#39;/%3E%3Cpath fill=&#39;%2334A853&#39; d=&#39;M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z&#39;/%3E%3Cpath fill=&#39;%23FBBC05&#39; d=&#39;M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z&#39;/%3E%3Cpath fill=&#39;%23EA4335&#39; d=&#39;M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z&#39;/%3E%3C/svg%3E"
+                                alt="Google" />
+                            Continue with Google
+                        </button>
+                        <p class="mt-6 text-center text-sm text-gray-400">
+                            Already have an account?
+                            <a href="SigninPage.html" class="text-white">Sign in</a>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        new Glide('#welcomeCarousel', {
+            type: 'carousel',
+            perView: 1,
+            gap: 0,
+            autoplay: 4000
+        }).mount();
+        document.querySelector('button[type="button"]').addEventListener('click', function () {
+            const passwordInput = document.getElementById('password');
+            const icon = this.querySelector('i');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+    </script>
+
+
+    <!-- ✅ Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+
+    <!-- ✅ Firebase Authentication Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+        // ✅ Correct Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDfYBpA_1m15BX4JAtG1xBi5HyUyYslw_Q",
+            authDomain: "ai-studyplanner.firebaseapp.com",
+            projectId: "ai-studyplanner",
+            storageBucket: "ai-studyplanner.appspot.com",
+            messagingSenderId: "264943137116",
+            appId: "1:264943137116:web:545c47706e760819df5199"
+        };
+
+        // ✅ Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // ✅ Sign Up Function (Using async/await)
+        document.getElementById("signup-form").addEventListener("submit", async function (e) {
+            e.preventDefault();
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+
+            try {
+                await createUserWithEmailAndPassword(auth, email, password);
+                alert("Sign Up Successful!");
+                window.location.href = "dashboard.html"; // Redirect to Dashboard
+            } catch (error) {
+                alert(error.message);
+            }
+        });
+
+        // ✅ Google Sign-In Functionality
+        document.getElementById("google-signin").addEventListener("click", async () => {
+            const provider = new GoogleAuthProvider(); // Move provider inside the function
+            try {
+                const result = await signInWithPopup(auth, provider);
+                const user = result.user;
+                alert("Google Sign-In Successful! Welcome, " + user.displayName);
+                window.location.href = "dashboard.html"; // Redirect to Dashboard
+            } catch (error) {
+                console.error("Google Sign-In error:", error);
+                alert("Error during Google Sign-In: " + error.message);
+            }
+        });
+        // ✅ Toggle Password Visibility
+        document.getElementById("toggle-password").addEventListener("click", function () {
+            const passwordInput = document.getElementById("password");
+            const icon = this.querySelector('i');
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+            } else {
+                passwordInput.type = "password";
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+            }
+        });
+    </script>
+
+
+</body>

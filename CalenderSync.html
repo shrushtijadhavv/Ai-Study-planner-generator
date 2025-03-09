@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar Sync Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://ai-public.creatie.ai/gen_page/tailwind-custom.css" rel="stylesheet">    <script src="https://cdn.tailwindcss.com/3.4.5?plugins=forms@0.5.7,typography@0.5.13,aspect-ratio@0.4.2,container-queries@0.1.1"></script>
+    <script src="https://ai-public.creatie.ai/gen_page/tailwind-config.min.js" data-color="#F5BB1B" data-border-radius="large"></script>
+    <!-- Google API Client Library -->
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://accounts.google.com/gsi/client"></script>
+    <style>
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+            .grid-cols-2 {
+                grid-template-columns: 1fr;
+            }
+            .flex-responsive {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 min-h-screen">
+    <div class="max-w-4xl mx-auto px-4 py-8">
+        <header class="flex items-center justify-between mb-8">            <div class="flex items-center gap-4">
+                <button id="backButton" class="text-gray-400 hover:text-gray-200 !rounded-button">                    <i class="fas fa-arrow-left text-xl"></i>
+                </button>
+                <h1 class="text-2xl font-semibold text-gray-100">Calendar Sync Management</h1>
+            </div>
+        </header>
+
+        <div id="connectionContainer" class="bg-gray-800 rounded-lg shadow-sm p-6 mb-6">            <div class="flex items-center justify-between mb-6 flex-responsive">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-custom rounded-full flex items-center justify-center">                        <i class="fab fa-google text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 id="userEmail" class="font-medium text-gray-100">Not connected</h3>
+                        <p id="connectionDate" class="text-sm text-gray-400">Click connect to link your Google Calendar</p>
+                    </div>                </div>
+                <div class="flex items-center gap-2">
+                    <span id="connectionStatus" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-700 text-gray-300">                        <span class="w-2 h-2 rounded-full bg-gray-400 mr-1.5"></span>
+                        Not Connected
+                    </span>                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <button id="connectButton" class="flex items-center justify-center gap-2 px-4 py-2 bg-custom text-white font-medium !rounded-button hover:bg-custom/90">                    <i class="fas fa-link"></i>
+                    Connect Google Calendar
+                </button>
+                <button id="syncHistoryButton" class="flex items-center justify-center gap-2 px-4 py-2 border border-gray-600 text-gray-300 font-medium !rounded-button hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed" disabled>                    <i class="fas fa-history"></i>
+                    View Sync History
+                </button>
+            </div>            <div class="border-t border-gray-700 pt-6">
+                <h3 class="font-medium text-gray-100 mb-4">Sync Settings</h3>                <div class="space-y-4">
+                    <div class="flex items-center justify-between flex-responsive">
+                        <div>                            <p class="font-medium text-gray-300">Auto-sync Frequency</p>
+                            <p class="text-sm text-gray-400">How often should calendars sync</p>
+                        </div>
+                        <select id="syncFrequency" class="form-select bg-gray-700 border-gray-600 text-gray-200 !rounded-button" disabled>                            <option>Every 15 minutes</option>
+                            <option>Every 30 minutes</option>
+                            <option>Every hour</option>
+                        </select>
+                    </div>
+
+                    <div class="flex items-center justify-between flex-responsive">                        <div>
+                            <p class="font-medium text-gray-300">Two-way Sync</p>
+                            <p class="text-sm text-gray-400">Sync changes in both directions</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">                            <input id="twoWaySync" type="checkbox" class="sr-only peer" checked disabled>
+                            <div class="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-custom"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="calendarsContainer" class="bg-gray-800 rounded-lg shadow-sm p-6 mb-6">            <h3 class="font-medium text-gray-100 mb-4">Selected Calendars</h3>
+            <div id="calendarsList" class="space-y-3">
+                <p class="text-gray-400 text-sm">Connect your Google Calendar to see available calendars</p>
+            </div>
+        </div>
+
+        <div id="dangerZone" class="bg-red-900/50 border border-red-800 rounded-lg p-6">            <h3 class="text-red-300 font-medium mb-2">Danger Zone</h3>
+            <p class="text-red-200 text-sm mb-4">Disconnecting will stop all future syncs. Historical data will remain unchanged.</p>            <button id="disconnectButton" class="flex items-center justify-center gap-2 px-4 py-2 bg-red-600 text-white font-medium !rounded-button hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed" disabled>                <i class="fas fa-unlink"></i>
+                Disconnect Google Calendar
+            </button>
+        </div>
+
+        <div id="syncActivity" class="mt-6 bg-gray-800 rounded-lg shadow-sm overflow-hidden">            <div class="p-4 bg-gray-800/50 border-b border-gray-700">
+                <h3 class="font-medium text-gray-100">Recent Sync Activity</h3>            </div>
+            <div id="syncActivityList" class="divide-y divide-gray-700">
+                <div class="p-4 text-center text-gray-400">
+                    <p>No sync activity to display</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Google API configuration
+        const CLIENT_ID = '1234567890-abcdefghijklmnopqrstuvwxyz.apps.googleusercontent.com'; // Replace with your actual client ID
+        const API_KEY = 'YOUR_API_KEY'; // Replace with your actual API key
+        const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest';
+        const SCOPES = 'https://www.googleapis.com/auth/calendar';
+        
+        let tokenClient;
+        let gapiInited = false;
+        let gisInited = false;
+        let isAuthorized = false;
+        let calendars = [];
+        let syncHistory = [];
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Initialize the Google API
+            gapiLoaded();
+            gisLoaded();
+            
+            // Back button functionality
+            const backButton = document.getElementById('backButton');
+            backButton.addEventListener('click', function() {
+                window.location.href = "settings.html";
+            });
+
+            // Connect/Sync button
+            const connectButton = document.getElementById('connectButton');
+            connectButton.addEventListener('click', function() {
+                if (!isAuthorized) {
+                    handleAuthClick();
+                } else {
+                    performSync();
+                }
+            });
+
+            // View Sync History button
+            const syncHistoryButton = document.getElementById('syncHistoryButton');
+            syncHistoryButton.addEventListener('click', function() {
+                // Scroll to sync activity section
+                const syncActivitySection = document.getElementById('syncActivity');
+                syncActivitySection.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Auto-sync frequency dropdown
+            const syncFrequencySelect = document.getElementById('syncFrequency');
+            
+            // Load saved frequency if available
+            const savedFrequency = localStorage.getItem('syncFrequency');
+            if (savedFrequency) {
+                for (let i = 0; i < syncFrequencySelect.options.length; i++) {
+                    if (syncFrequencySelect.options[i].text === savedFrequency) {
+                        syncFrequencySelect.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+            
+            // Save frequency when changed
+            syncFrequencySelect.addEventListener('change', function() {
+                localStorage.setItem('syncFrequency', syncFrequencySelect.options[syncFrequencySelect.selectedIndex].text);
+            });
+
+            // Two-way sync toggle
+            const twoWayToggle = document.getElementById('twoWaySync');
+            
+            // Load saved setting
+            const twoWaySyncEnabled = localStorage.getItem('twoWaySync');
+            if (twoWaySyncEnabled !== null) {
+                twoWayToggle.checked = twoWaySyncEnabled === 'true';
+            }
+            
+            // Save setting when changed
+            twoWayToggle.addEventListener('change', function() {
+                localStorage.setItem('twoWaySync', twoWayToggle.checked);
+            });
+
+            // Disconnect button
+            const disconnectButton = document.getElementById('disconnectButton');
+            disconnectButton.addEventListener('click', function() {
+                const confirmation = confirm("Are you sure you want to disconnect Google Calendar? This will stop all future syncs.");
+                if (confirmation) {
+                    disconnectGoogleCalendar();
+                }
+            });
+        });
+
+        // Initialize the Google API client library
+        function gapiLoaded() {
+            gapi.load('client', initializeGapiClient);
+        }
+
+        // Initialize the Google API client library
+        async function initializeGapiClient() {
+            await gapi.client.init({
+                apiKey: API_KEY,
+                discoveryDocs: [DISCOVERY_DOC],
+            });
+            gapiInited = true;
+            maybeEnableButtons();
+        }
+
+        // Initialize the Google Identity Services client
+        function gisLoaded() {
+            tokenClient = google.accounts.oauth2.initTokenClient({
+                client_id: CLIENT_ID,
+                scope: SCOPES,
+                callback: '', // defined later
+            });
+            gisInited = true;
+            maybeEnableButtons();
+        }
+
+        // Enable buttons if both APIs are initialized
+        function maybeEnableButtons() {
+            if (gapiInited && gisInited) {
+                // Check if user is already authorized
+                checkAuthStatus();
+            }
+        }
+
+        // Check if user is already authorized
+        function checkAuthStatus() {
+            const token = localStorage.getItem('gapi_access_token');
+            const tokenExpiry = localStorage.getItem('gapi_token_expiry');
+            
+            if (token && tokenExpiry && new Date().getTime() < parseInt(tokenExpiry)) {
+                // Token exists and is valid
+                gapi.client.setToken({ access_token: token });
+                isAuthorized = true;
+                updateUIForAuthorized();
+                loadCalendars();
+            }
+        }
+
+        // Handle authorization
+        function handleAuthClick() {
+            tokenClient.callback = async (resp) => {
+                if (resp.error !== undefined) {
+                    throw resp;
+                }
+                
+                // Store token and expiry
+                const token = gapi.client.getToken().access_token;
+                const expiryTime = new Date().getTime() + 3600 * 1000; // 1 hour from now
+                localStorage.setItem('gapi_access_token', token);
+                localStorage.setItem('gapi_token_expiry', expiryTime);
+                
+                isAuthorized = true;
+                updateUIForAuthorized();
+                loadCalendars();
+            };
+
+            if (gapi.client.getToken() === null) {
+                // Prompt the user to select a Google Account and ask for consent
+                tokenClient.requestAccessToken({ prompt: 'consent' });
+            } else {
+                // Skip display of account chooser and consent dialog
+                tokenClient.requestAccessToken({ prompt: '' });
+            }
+        }
+
+        // Update UI for authorized state
+        function updateUIForAuthorized() {
+            const connectButton = document.getElementById('connectButton');
+            const syncHistoryButton = document.getElementById('syncHistoryButton');
+            const syncFrequencySelect = document.getElementById('syncFrequency');
+            const twoWayToggle = document.getElementById('twoWaySync');
+            const disconnectButton = document.getElementById('disconnectButton');
+            const connectionStatus = document.getElementById('connectionStatus');
+            
+            // Get user info
+            gapi.client.calendar.calendarList.list().then(response => {
+                const userEmail = response.result.items[0]?.ownerName || 'Google Calendar User';
+                document.getElementById('userEmail').textContent = userEmail;
+                
+                const now = new Date();
+                const formattedDate = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                document.getElementById('connectionDate').textContent = `Connected since ${formattedDate}`;
+                
+                // Update connection status
+                connectionStatus.innerHTML = '<span class="w-2 h-2 rounded-full bg-green-400 mr-1.5"></span>Connected';
+                connectionStatus.classList.remove('bg-gray-700', 'text-gray-300');
+                connectionStatus.classList.add('bg-green-900', 'text-green-300');
+                
+                // Update button text
+                connectButton.innerHTML = '<i class="fas fa-sync-alt"></i> Force Re-sync Now';
+                
+                // Enable buttons and controls
+                syncHistoryButton.disabled = false;
+                syncFrequencySelect.disabled = false;
+                twoWayToggle.disabled = false;
+                disconnectButton.disabled = false;
+                
+                // Add a sync record
+                addSyncRecord('Connected to Google Calendar', 'green');
+            }).catch(error => {
+                console.error('Error fetching user info:', error);
+            });
+        }
+
+        // Load calendars from Google Calendar
+        function loadCalendars() {
+            gapi.client.calendar.calendarList.list().then(response => {
+                calendars = response.result.items;
+                displayCalendars();
+            }).catch(error => {
+                console.error('Error loading calendars:', error);
+            });
+        }
+
+        // Display calendars in the UI
+        function displayCalendars() {
+            const calendarsList = document.getElementById('calendarsList');
+            calendarsList.innerHTML = '';
+            
+            if (calendars.length === 0) {
+                calendarsList.innerHTML = '<p class="text-gray-400 text-sm">No calendars found</p>';
+                return;
+            }
+            
+            calendars.forEach((calendar, index) => {
+                const isPrimary = calendar.primary ? true : false;
+                const savedState = localStorage.getItem(`calendar_${calendar.id}`);
+                const isChecked = savedState !== null ? savedState === 'true' : isPrimary;
+                
+                const calendarItem = document.createElement('label');
+                calendarItem.className = 'flex items-center';
+                calendarItem.innerHTML = `
+                    <input type="checkbox" class="form-checkbox text-custom border-gray-600 rounded bg-gray-700" data-calendar-id="${calendar.id}" ${isChecked ? 'checked' : ''}>
+                    <span class="ml-3">
+                        <span class="text-gray-300">${calendar.summary}</span>
+                        ${isPrimary ? '<span class="text-sm text-gray-400 ml-2">(Primary)</span>' : ''}
+                    </span>
+                `;
+                
+                const checkbox = calendarItem.querySelector('input[type="checkbox"]');
+                checkbox.addEventListener('change', function() {
+                    localStorage.setItem(`calendar_${calendar.id}`, checkbox.checked);
+                });
+                
+                calendarsList.appendChild(calendarItem);
+            });
+        }
+
+        // Perform calendar sync
+        function performSync() {
+            // Show syncing status
+            addSyncRecord('Syncing...', 'yellow');
+            
+            // Get selected calendars
+            const selectedCalendars = [];
+            document.querySelectorAll('#calendarsList input[type="checkbox"]:checked').forEach(checkbox => {
+                selectedCalendars.push(checkbox.getAttribute('data-calendar-id'));
+            });
+            
+            // Simulate sync process (in a real app, this would actually sync with your backend)
+            setTimeout(function() {
+                // Add success record
+                addSyncRecord('Sync completed successfully', 'green');
+                alert("Calendar sync completed successfully!");
+            }, 1500);
+        }
+
+        // Add a sync record to the history
+        function addSyncRecord(message, status) {
+            const syncActivityList = document.getElementById('syncActivityList');
+            
+            // Clear "no activity" message if it exists
+            if (syncActivityList.querySelector('p')?.textContent === 'No sync activity to display') {
+                syncActivityList.innerHTML = '';
+            }
+            
+            // Create new record
+            const record = document.createElement('div');
+            record.className = 'p-4';
+            
+            const now = new Date();
+            const timeText = 'Just now';
+            
+            let statusColor = 'bg-gray-500';
+            if (status === 'green') statusColor = 'bg-green-500';
+            if (status === 'yellow') statusColor = 'bg-yellow-500';
+            if (status === 'red') statusColor = 'bg-red-500';
+            
+            record.innerHTML = `
+                <div class="flex items-center gap-3">
+                    <span class="w-2 h-2 rounded-full ${statusColor}"></span>
+                    <p class="text-sm text-gray-200">${message}</p>
+                    <span class="text-sm text-gray-400">${timeText}</span>
+                </div>
+            `;
+            
+            // Add to the top of the list
+            syncActivityList.insertBefore(record, syncActivityList.firstChild);
+            
+            // Store in history
+            syncHistory.unshift({
+                message,
+                status,
+                timestamp: now.getTime()
+            });
+            
+            // Update timestamps periodically
+            updateTimestamps();
+        }
+
+        // Update timestamps in sync records
+        function updateTimestamps() {
+            const timeElements = document.querySelectorAll('#syncActivityList .text-gray-400');
+            
+            timeElements.forEach((element, index) => {
+                if (index < syncHistory.length) {
+                    const timestamp = syncHistory[index].timestamp;
+                    const now = new Date().getTime();
+                    const diff = now - timestamp;
+                    
+                    let timeText = 'Just now';
+                    if (diff > 60000) { // more than a minute
+                        const minutes = Math.floor(diff / 60000);
+                        timeText = `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+                    }
+                    if (diff > 3600000) { // more than an hour
+                        const hours = Math.floor(diff / 3600000);
+                        timeText = `${hours} hour${hours > 1 ? 's' : ''} ago`;
+                    }
+                    
+                    element.textContent = timeText;
+                }
+            });
+            
+            // Update again in 60 seconds
+            setTimeout(updateTimestamps, 60000);
+        }
+
+        // Disconnect Google Calendar
+        function disconnectGoogleCalendar() {
+            // Clear stored token
+            localStorage.removeItem('gapi_access_token');
+            localStorage.removeItem('gapi_token_expiry');
+            
+            // Reset UI
+            const connectButton = document.getElementById('connectButton');
+            const syncHistoryButton = document.getElementById('syncHistoryButton');
+            const syncFrequencySelect = document.getElementById('syncFrequency');
+            const twoWayToggle = document.getElementById('twoWaySync');
+            const disconnectButton = document.getElementById('disconnectButton');
+            const connectionStatus = document.getElementById('connectionStatus');
+            const userEmail = document.getElementById('userEmail');
+            const connectionDate = document.getElementById('connectionDate');
+            const calendarsList = document.getElementById('calendarsList');
+            
+            // Update connection status
+            connectionStatus.innerHTML = '<span class="w-2 h-2 rounded-full bg-red-400 mr-1.5"></span>Disconnected';
+            connectionStatus.classList.remove('bg-green-900', 'text-green-300');
+            connectionStatus.classList.add('bg-red-900', 'text-red-300');
+            
+            // Update user info
+            userEmail.textContent = 'Not connected';
+            connectionDate.textContent = 'Click connect to link your Google Calendar';
+            
+            // Update button text
+            connectButton.innerHTML = '<i class="fas fa-link"></i> Connect Google Calendar';
+            
+            // Disable buttons and controls
+            syncHistoryButton.disabled = true;
+            syncFrequencySelect.disabled = true;
+            twoWayToggle.disabled = true;
+            disconnectButton.disabled = true;
+            
+            // Clear calendars list
+            calendarsList.innerHTML = '<p class="text-gray-400 text-sm">Connect your Google Calendar to see available calendars</p>';
+            
+            // Add a disconnect record
+            addSyncRecord('Disconnected from Google Calendar', 'red');
+            
+            // Reset authorization state
+            isAuthorized = false;
+            
+            alert("Google Calendar disconnected successfully.");
+        }
+    </script>
+</body>
+</html>

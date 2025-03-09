@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Challenges & Rewards</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://ai-public.creatie.ai/gen_page/tailwind-custom.css" rel="stylesheet">    <script src="https://cdn.tailwindcss.com/3.4.5?plugins=forms@0.5.7,typography@0.5.13,aspect-ratio@0.4.2,container-queries@0.1.1"></script>
+    <script src="https://ai-public.creatie.ai/gen_page/tailwind-config.min.js" data-color="#16BC88" data-border-radius="large"></script>
+    <link rel="stylesheet" href="style/Challenges.css">
+    <link rel="stylesheet" href="style/notifications.css">
+</head>
+<body class="bg-gray-900 font-sans">
+    <!-- Toast notification container -->
+    <div id="toast" class="toast">
+        <span id="toast-message"></span>
+    </div>
+
+    <nav class="bg-gray-800 border-b border-gray-700">
+        <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">                        <a href="Dashboard.html">
+                            <img class="h-8 w-auto" src="https://ai-public.creatie.ai/gen_page/logo_placeholder.png" alt="Logo">
+                        </a>
+                    </div>                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8 desktop-menu">
+                        <a href="Challenges.html" class="border-custom text-white inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Challenges</a>
+                        <a href="Rewards.html" class="border-transparent text-gray-300 hover:text-gray-100 hover:border-gray-300 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Rewards</a>
+                        <a href="Leaderboard.html" class="border-transparent text-gray-300 hover:text-gray-100 hover:border-gray-300 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Leaderboard</a>
+                    </div>
+                    <div class="sm:hidden">
+                        <button type="button" class="mobile-menu-button text-gray-300 hover:text-white p-2" id="mobile-menu-button">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <button type="button" id="notificationBtn" aria-label="Notifications" class="relative">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge"></span>
+                    </button>
+                    <div class="flex-shrink-0">                        <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-custom text-white" id="xp-counter">                            <i class="fas fa-star mr-1"></i>1,234 XP
+                        </span>
+                    </div>
+                </div>            </div>
+        </div>
+    </nav>
+    
+    <!-- Mobile menu -->
+    <div class="sm:hidden mobile-menu bg-gray-800 border-b border-gray-700" id="mobile-menu">
+        <div class="px-2 pt-2 pb-3 space-y-1">
+            <a href="Challenges.html" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Challenges</a>
+            <a href="Rewards.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Rewards</a>
+            <a href="Leaderboard.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Leaderboard</a>
+        </div>
+    </div>
+
+    <main class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="mb-8">            <h1 class="text-3xl font-bold text-white">Daily Challenges</h1>
+            <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">                <div class="bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-700 challenge-card">
+                    <div class="flex items-center justify-between mb-4">                        <h3 class="text-lg font-medium text-white">Math Challenge</h3>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-900 text-green-300 countdown" data-hours="4">                            <i class="fas fa-clock mr-1"></i><span class="time-left">4h left</span>
+                        </span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Complete 2 study pods in Mathematics</p>
+                    <div class="relative pt-1">
+                        <div class="flex mb-2 items-center justify-between">                            <div>
+                                <span class="text-xs font-semibold inline-block text-custom">Progress</span>                            </div>
+                            <div class="text-right">
+                                <span class="text-xs font-semibold inline-block text-custom progress-text">50%</span>
+                            </div>
+                        </div>
+                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-700">                            <div style="width:50%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-custom progress-bar"></div>
+                        </div>
+                        <button class="w-full bg-custom text-white !rounded-button px-4 py-2 text-sm font-medium hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom hover-effect challenge-button" data-xp="100" data-progress="50">
+                            Complete Challenge (+100 XP)
+                        </button>
+                    </div>
+                </div>                <div class="bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-700 challenge-card">
+                    <div class="flex items-center justify-between mb-4">                        <h3 class="text-lg font-medium text-white">Reading Challenge</h3>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-900 text-green-300 countdown" data-hours="2">                            <i class="fas fa-clock mr-1"></i><span class="time-left">2h left</span>
+                        </span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Read 3 chapters from your current book</p>
+                    <div class="relative pt-1">
+                        <div class="flex mb-2 items-center justify-between">                            <div>
+                                <span class="text-xs font-semibold inline-block text-custom">Progress</span>                            </div>
+                            <div class="text-right">
+                                <span class="text-xs font-semibold inline-block text-custom progress-text">33%</span>
+                            </div>
+                        </div>
+                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-700">                            <div style="width:33%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-custom progress-bar"></div>
+                        </div>
+                        <button class="w-full bg-custom text-white !rounded-button px-4 py-2 text-sm font-medium hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom hover-effect challenge-button" data-xp="75" data-progress="33">
+                            Complete Challenge (+75 XP)
+                        </button>
+                    </div>
+                </div>                <div class="bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-700 challenge-card">
+                    <div class="flex items-center justify-between mb-4">                        <h3 class="text-lg font-medium text-white">Writing Challenge</h3>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-900 text-green-300 countdown" data-hours="6">                            <i class="fas fa-clock mr-1"></i><span class="time-left">6h left</span>
+                        </span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Write a 500-word essay on any topic</p>
+                    <div class="relative pt-1">
+                        <div class="flex mb-2 items-center justify-between">                            <div>
+                                <span class="text-xs font-semibold inline-block text-custom">Progress</span>                            </div>
+                            <div class="text-right">
+                                <span class="text-xs font-semibold inline-block text-custom progress-text">0%</span>
+                            </div>
+                        </div>
+                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-700">                            <div style="width:0%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-custom progress-bar"></div>
+                        </div>
+                        <button class="w-full bg-custom text-white !rounded-button px-4 py-2 text-sm font-medium hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom hover-effect challenge-button" data-xp="150" data-progress="0">
+                            Start Challenge (+150 XP)
+                        </button>
+                    </div>
+                </div>            </div>
+        </div>
+
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold text-white mb-6">Rewards Store</h2>            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                <div class="bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-700 reward-card">                    <div class="text-center">
+                        <i class="fas fa-medal text-4xl text-custom mb-4"></i>
+                        <h3 class="text-lg font-medium text-white mb-2">Gold Badge</h3>
+                        <p class="text-gray-400 mb-4">Show off your achievements</p>
+                        <button class="w-full bg-custom text-white !rounded-button px-4 py-2 text-sm font-medium hover:bg-opacity-90 hover-effect reward-button" data-cost="500">
+                            Redeem (500 XP)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-700 reward-card">                    <div class="text-center">
+                        <i class="fas fa-palette text-4xl text-custom mb-4"></i>
+                        <h3 class="text-lg font-medium text-white mb-2">Dark Theme</h3>
+                        <p class="text-gray-400 mb-4">Customize your experience</p>
+                        <button class="w-full bg-custom text-white !rounded-button px-4 py-2 text-sm font-medium hover:bg-opacity-90 hover-effect reward-button" data-cost="300">
+                            Redeem (300 XP)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-700 reward-card">                    <div class="text-center">
+                        <i class="fas fa-ticket text-4xl text-custom mb-4"></i>
+                        <h3 class="text-lg font-medium text-white mb-2">Discount Coupon</h3>
+                        <p class="text-gray-400 mb-4">20% off on next purchase</p>
+                        <button class="w-full bg-custom text-white !rounded-button px-4 py-2 text-sm font-medium hover:bg-opacity-90 hover-effect reward-button" data-cost="1000">
+                            Redeem (1000 XP)
+                        </button>
+                    </div>
+                </div>                <div class="bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-700 reward-card">
+                    <div class="text-center">                        <i class="fas fa-crown text-4xl text-custom mb-4"></i>
+                        <h3 class="text-lg font-medium text-white mb-2">Premium Status</h3>
+                        <p class="text-gray-400 mb-4">Unlock exclusive features</p>
+                        <button class="w-full bg-custom text-white !rounded-button px-4 py-2 text-sm font-medium hover:bg-opacity-90 hover-effect reward-button" data-cost="2000">
+                            Redeem (2000 XP)
+                        </button>
+                    </div>
+                </div>            </div>
+        </div>
+
+        <div>
+            <h2 class="text-2xl font-bold text-white mb-6">Leaderboard</h2>
+            <div class="bg-gray-800 rounded-lg shadow-sm border border-gray-700 overflow-hidden">                <table class="min-w-full divide-y divide-gray-700 responsive-table">
+                    <thead class="bg-gray-900">
+                        <tr>                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Rank</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">User</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Challenges Completed</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Total XP</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-gray-800 divide-y divide-gray-700">                        <tr class="bg-custom bg-opacity-10">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">1</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">                                    <div class="h-8 w-8 rounded-full bg-custom text-white flex items-center justify-center">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-white">Alex Johnson</div>
+                                    </div>
+                                </div>
+                            </td>                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">42</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">5,230</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">2</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">                                    <div class="h-8 w-8 rounded-full bg-gray-700 flex items-center justify-center">
+                                        <i class="fas fa-user text-gray-400"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-white">Sarah Smith</div>
+                                    </div>
+                                </div>
+                            </td>                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">38</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">4,890</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">3</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">                                    <div class="h-8 w-8 rounded-full bg-gray-700 flex items-center justify-center">
+                                        <i class="fas fa-user text-gray-400"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-white">Mike Wilson</div>
+                                    </div>
+                                </div>
+                            </td>                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">35</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">4,550</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>    <footer class="bg-gray-800 border-t border-gray-700 mt-12">
+        <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-6">            <div class="flex justify-between items-center footer-content">
+                <div class="text-sm text-gray-400">© 2024 Learning Platform. All rights reserved.</div>                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-gray-400">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-gray-400">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-gray-400">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="script/notifications.js"></script>
+    <script src="script/challenges.js"></script>
+</body>
+</html>

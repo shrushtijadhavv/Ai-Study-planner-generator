@@ -1,0 +1,186 @@
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+    .mobile-menu-button {
+        display: block;
+    }
+    .desktop-menu {
+        display: none;
+    }
+    .mobile-menu {
+        display: none;
+    }
+    .mobile-menu.active {
+        display: block;
+    }
+}
+
+/* Button hover effects */
+.hover-effect {
+    transition: all 0.3s ease;
+}
+.hover-effect:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Progress bar animation */
+.progress-bar {
+    transition: width 0.5s ease-in-out;
+}
+
+/* Responsive table styles */
+@media (max-width: 768px) {
+    .responsive-table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .responsive-table th,
+    .responsive-table td {
+        white-space: nowrap;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+/* Toast notification */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #16BC88;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Rank styles */
+.rank-1 {
+    color: gold;
+    font-weight: bold;
+}
+
+.rank-2 {
+    color: silver;
+    font-weight: bold;
+}
+
+.rank-3 {
+    color: #cd7f32; /* bronze */
+    font-weight: bold;
+}
+
+/* User card hover effect */
+.user-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.user-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+}
+
+/* Badge styles */
+.badge {
+    position: relative;
+    overflow: hidden;
+}
+
+.badge::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(45deg);
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0% {
+        top: -50%;
+        left: -50%;
+    }
+    100% {
+        top: 150%;
+        left: 150%;
+    }
+}
+
+/* Tab styles */
+.tab {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab.active {
+    border-bottom: 2px solid #16BC88;
+    color: #16BC88;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Highlight current user */
+.current-user {
+    background-color: rgba(22, 188, 136, 0.15);
+    border-left: 3px solid #16BC88;
+}
+
+/* Rank change indicator */
+.rank-change {
+    font-size: 0.75rem;
+    padding: 2px 5px;
+    border-radius: 4px;
+    margin-left: 5px;
+}
+
+.rank-up {
+    background-color: rgba(22, 188, 136, 0.2);
+    color: #16BC88;
+}
+
+.rank-down {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+
+.rank-same {
+    background-color: rgba(156, 163, 175, 0.2);
+    color: #9ca3af;
+}

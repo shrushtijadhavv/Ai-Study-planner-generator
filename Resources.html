@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Study Resources</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://ai-public.creatie.ai/gen_page/tailwind-custom.css" rel="stylesheet">    <script src="https://cdn.tailwindcss.com/3.4.5?plugins=forms@0.5.7,typography@0.5.13,aspect-ratio@0.4.2,container-queries@0.1.1"></script>
+    <script src="https://ai-public.creatie.ai/gen_page/tailwind-config.min.js" data-color="#AC1BF5" data-border-radius="large"></script>
+    <link rel="stylesheet" href="style/notifications.css">
+</head>
+<body class="bg-gray-900 font-sans text-gray-100">
+    <header class="sticky top-0 z-50 bg-gray-800 border-b border-gray-700">        <nav class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">                    <img src="https://ai-public.creatie.ai/gen_page/logo_placeholder.png" alt="Logo" class="h-8 w-auto">
+                    <div class="ml-8 relative">                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-search text-gray-400"></i>
+                        </div>
+                        <input type="text" placeholder="Search resources..." class="block w-96 pl-10 pr-3 py-2 border border-gray-600 !rounded-button bg-gray-700 text-white focus:outline-none focus:ring-1 focus:ring-custom focus:border-custom">                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button type="button" id="notificationBtn" aria-label="Notifications" class="relative">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge"></span>
+                    </button>
+                    <button class="!rounded-button bg-custom text-white px-4 py-2 hover:bg-custom/90">                        <i class="fas fa-plus mr-2"></i>Add Resource
+                    </button>
+                    <button class="!rounded-button bg-gray-700 border border-gray-600 px-4 py-2 hover:bg-gray-600 text-white">                        <i class="far fa-bookmark mr-2"></i>Bookmarks
+                    </button>
+                </div>
+            </div>        </nav>
+    </header>
+
+    <main class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="flex gap-8">
+            <aside class="w-64 flex-shrink-0">                <div class="bg-gray-800 p-6 !rounded-button shadow-sm border border-gray-700">
+                    <h3 class="font-semibold text-lg mb-4 text-white">Filters</h3>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-medium text-sm text-gray-300 mb-3">Subject</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center">                                    <input type="checkbox" class="!rounded-button text-custom focus:ring-custom bg-gray-700 border-gray-600">                                    <span class="ml-2 text-sm text-gray-300">Mathematics</span>
+                                </label>                                <label class="flex items-center">
+                                    <input type="checkbox" class="!rounded-button text-custom focus:ring-custom bg-gray-700 border-gray-600">                                    <span class="ml-2 text-sm text-gray-300">Physics</span>
+                                </label>                                <label class="flex items-center">
+                                    <input type="checkbox" class="!rounded-button text-custom focus:ring-custom bg-gray-700 border-gray-600">                                    <span class="ml-2 text-sm text-gray-300">Computer Science</span>
+                                </label>                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="font-medium text-sm text-gray-300 mb-3">Difficulty</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center">                                    <input type="checkbox" class="!rounded-button text-custom focus:ring-custom bg-gray-700 border-gray-600">                                    <span class="ml-2 text-sm text-gray-300">Beginner</span>
+                                </label>                                <label class="flex items-center">
+                                    <input type="checkbox" class="!rounded-button text-custom focus:ring-custom bg-gray-700 border-gray-600">                                    <span class="ml-2 text-sm text-gray-300">Intermediate</span>
+                                </label>                                <label class="flex items-center">
+                                    <input type="checkbox" class="!rounded-button text-custom focus:ring-custom bg-gray-700 border-gray-600">                                    <span class="ml-2 text-sm text-gray-300">Advanced</span>
+                                </label>                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="font-medium text-sm text-gray-300 mb-3">Format</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center">                                    <input type="checkbox" class="!rounded-button text-custom focus:ring-custom bg-gray-700 border-gray-600">                                    <span class="ml-2 text-sm text-gray-300">Video</span>
+                                </label>                                <label class="flex items-center">
+                                    <input type="checkbox" class="!rounded-button text-custom focus:ring-custom bg-gray-700 border-gray-600">                                    <span class="ml-2 text-sm text-gray-300">Article</span>
+                                </label>                                <label class="flex items-center">
+                                    <input type="checkbox" class="!rounded-button text-custom focus:ring-custom bg-gray-700 border-gray-600">                                    <span class="ml-2 text-sm text-gray-300">PDF</span>
+                                </label>                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>            <div class="flex-1">
+                <section class="mb-12">
+                    <h2 class="text-2xl font-bold mb-6 text-white">Recommended for You</h2>
+                    <div class="grid grid-cols-3 gap-6">
+                        <div class="bg-gray-800 !rounded-button shadow-sm border border-gray-700 overflow-hidden hover:shadow-md transition-shadow">                            <img src="https://creatie.ai/ai/api/search-image?query=A modern classroom setting with advanced technology equipment, clean and minimalist design, showing educational materials and digital screens on a pristine white background, professional lighting, high-quality photography&width=400&height=240&orientation=landscape&flag=70c0054e-181d-490a-8cbb-6fb364a319fc&flag=8ea5237e-54d2-43a7-8e67-fd719138fa23" class="w-full h-48 object-cover" alt="Resource thumbnail">                            <div class="p-4">
+                                <div class="flex items-center justify-between mb-2">                                    <span class="text-xs font-medium px-2 py-1 bg-blue-900 text-blue-200 !rounded-button">Video</span>                                    <span class="text-xs font-medium px-2 py-1 bg-green-900 text-green-200 !rounded-button">Beginner</span>                                </div>
+                                <h3 class="font-semibold mb-2 text-white">Introduction to Machine Learning</h3>                                <p class="text-sm text-gray-400 mb-4">Learn the fundamentals of machine learning algorithms and their applications.</p>                                <div class="flex items-center justify-between">
+                                    <button class="text-custom hover:text-custom/80">                                        <i class="far fa-bookmark"></i>
+                                    </button>
+                                    <button class="!rounded-button bg-custom text-white px-3 py-1.5 text-sm hover:bg-custom/90">                                        <i class="fas fa-play mr-1"></i>Watch Now
+                                    </button>
+                                </div>                            </div>
+                        </div>
+
+                        <div class="bg-gray-800 !rounded-button shadow-sm border border-gray-700 overflow-hidden hover:shadow-md transition-shadow">                            <img src="https://creatie.ai/ai/api/search-image?query=A professional study setup with textbooks, laptop, and study materials neatly arranged on a clean desk, modern minimalist style, bright lighting, educational atmosphere&width=400&height=240&orientation=landscape&flag=5086350d-23f3-4339-9a20-0d4e7d1c3a4f&flag=8c152481-ae2f-4847-86d9-7e017c10ac2a" class="w-full h-48 object-cover" alt="Resource thumbnail">                            <div class="p-4">
+                                <div class="flex items-center justify-between mb-2">                                    <span class="text-xs font-medium px-2 py-1 bg-purple-900 text-purple-200 !rounded-button">Article</span>                                    <span class="text-xs font-medium px-2 py-1 bg-yellow-900 text-yellow-200 !rounded-button">Intermediate</span>                                </div>
+                                <h3 class="font-semibold mb-2 text-white">Advanced Data Structures</h3>                                <p class="text-sm text-gray-400 mb-4">Deep dive into complex data structures and their implementations.</p>                                <div class="flex items-center justify-between">
+                                    <button class="text-custom hover:text-custom/80">                                        <i class="far fa-bookmark"></i>
+                                    </button>
+                                    <button class="!rounded-button bg-custom text-white px-3 py-1.5 text-sm hover:bg-custom/90">                                        <i class="fas fa-book-open mr-1"></i>Read Now
+                                    </button>                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-800 !rounded-button shadow-sm border border-gray-700 overflow-hidden hover:shadow-md transition-shadow">                            <img src="https://creatie.ai/ai/api/search-image?query=A modern digital learning environment with interactive screens and educational graphics, clean white background, professional studio lighting, high-tech educational setting&width=400&height=240&orientation=landscape&flag=e51221f0-dc70-49cf-aea4-dc526f01bae4&flag=802726c2-d8af-4389-be06-78532abec417" class="w-full h-48 object-cover" alt="Resource thumbnail">                            <div class="p-4">
+                                <div class="flex items-center justify-between mb-2">                                    <span class="text-xs font-medium px-2 py-1 bg-red-900 text-red-200 !rounded-button">PDF</span>                                    <span class="text-xs font-medium px-2 py-1 bg-green-900 text-green-200 !rounded-button">Beginner</span>                                </div>
+                                <h3 class="font-semibold mb-2 text-white">Python Programming Guide</h3>                                <p class="text-sm text-gray-400 mb-4">Comprehensive guide to Python programming for beginners.</p>                                <div class="flex items-center justify-between">
+                                    <button class="text-custom hover:text-custom/80">                                        <i class="far fa-bookmark"></i>
+                                    </button>
+                                    <button class="!rounded-button bg-custom text-white px-3 py-1.5 text-sm hover:bg-custom/90">                                        <i class="fas fa-download mr-1"></i>Download
+                                    </button>                                </div>
+                            </div>
+                        </div>
+                    </div>                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold mb-6 text-white">All Resources</h2>                    <div class="grid grid-cols-3 gap-6">
+                        <div class="bg-gray-800 !rounded-button shadow-sm border border-gray-700 overflow-hidden hover:shadow-md transition-shadow">                            <img src="https://creatie.ai/ai/api/search-image?query=A modern computer lab setting with multiple screens showing programming code, clean and professional environment, bright lighting, educational technology focus&width=400&height=240&orientation=landscape&flag=963f1d3a-c74c-4418-810d-a110cff251ca&flag=0b26113b-3ab8-48a0-997d-dd7685420806" class="w-full h-48 object-cover" alt="Resource thumbnail">                            <div class="p-4">
+                                <div class="flex items-center justify-between mb-2">                                    <span class="text-xs font-medium px-2 py-1 bg-blue-900 text-blue-200 !rounded-button">Video</span>                                    <span class="text-xs font-medium px-2 py-1 bg-yellow-900 text-yellow-200 !rounded-button">Intermediate</span>                                </div>
+                                <h3 class="font-semibold mb-2 text-white">Web Development Fundamentals</h3>                                <p class="text-sm text-gray-400 mb-4">Learn HTML, CSS, and JavaScript basics for web development.</p>                                <div class="flex items-center justify-between">
+                                    <button class="text-custom hover:text-custom/80">                                        <i class="far fa-bookmark"></i>
+                                    </button>
+                                    <button class="!rounded-button bg-custom text-white px-3 py-1.5 text-sm hover:bg-custom/90">                                        <i class="fas fa-play mr-1"></i>Watch Now
+                                    </button>
+                                </div>                            </div>
+                        </div>
+
+                        <div class="bg-gray-800 !rounded-button shadow-sm border border-gray-700 overflow-hidden hover:shadow-md transition-shadow">                            <img src="https://creatie.ai/ai/api/search-image?query=A modern study environment with mathematical equations and formulas displayed on digital screens, clean white background, professional lighting, educational setting&width=400&height=240&orientation=landscape&flag=b56819c3-6e6a-4ab0-b3fe-f7a975db2637&flag=65b3bf83-c0f7-4f8f-a9d5-f433ee25d6fc" class="w-full h-48 object-cover" alt="Resource thumbnail">                            <div class="p-4">
+                                <div class="flex items-center justify-between mb-2">                                    <span class="text-xs font-medium px-2 py-1 bg-purple-900 text-purple-200 !rounded-button">Article</span>                                    <span class="text-xs font-medium px-2 py-1 bg-red-900 text-red-200 !rounded-button">Advanced</span>                                </div>
+                                <h3 class="font-semibold mb-2 text-white">Linear Algebra Essentials</h3>                                <p class="text-sm text-gray-400 mb-4">Advanced concepts in linear algebra and their applications.</p>                                <div class="flex items-center justify-between">
+                                    <button class="text-custom hover:text-custom/80">                                        <i class="far fa-bookmark"></i>
+                                    </button>
+                                    <button class="!rounded-button bg-custom text-white px-3 py-1.5 text-sm hover:bg-custom/90">                                        <i class="fas fa-book-open mr-1"></i>Read Now
+                                    </button>                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-800 !rounded-button shadow-sm border border-gray-700 overflow-hidden hover:shadow-md transition-shadow">                            <img src="https://creatie.ai/ai/api/search-image?query=A modern physics laboratory setting with scientific equipment and digital displays, clean and professional environment, bright lighting, educational focus&width=400&height=240&orientation=landscape&flag=b71eeb01-a51e-4781-8fd4-1e927f0238ba&flag=88a081b3-478f-460c-89a8-1cfb98d9a7b1" class="w-full h-48 object-cover" alt="Resource thumbnail">                            <div class="p-4">
+                                <div class="flex items-center justify-between mb-2">                                    <span class="text-xs font-medium px-2 py-1 bg-blue-900 text-blue-200 !rounded-button">Video</span>                                    <span class="text-xs font-medium px-2 py-1 bg-green-900 text-green-200 !rounded-button">Beginner</span>                                </div>
+                                <h3 class="font-semibold mb-2 text-white">Physics 101</h3>                                <p class="text-sm text-gray-400 mb-4">Introduction to basic physics concepts and principles.</p>                                <div class="flex items-center justify-between">
+                                    <button class="text-custom hover:text-custom/80">                                        <i class="far fa-bookmark"></i>
+                                    </button>
+                                    <button class="!rounded-button bg-custom text-white px-3 py-1.5 text-sm hover:bg-custom/90">                                        <i class="fas fa-play mr-1"></i>Watch Now
+                                    </button>
+                                </div>                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>        </div>
+    </main>
+
+    <footer class="bg-gray-800 border-t border-gray-700 mt-12">
+        <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-8">            <div class="flex justify-between items-center">
+                <div class="text-sm text-gray-400">
+                    © 2024 Study Resources. All rights reserved.
+                </div>                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-gray-400">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-gray-400">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-gray-400">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="script/notifications.js"></script>
+    <script src="script/resources.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Search functionality
+            const searchInput = document.querySelector('input[placeholder="Search resources..."]');
+            const resourceCards = document.querySelectorAll('.bg-gray-800.!rounded-button.shadow-sm.border.border-gray-700');
+            
+            searchInput.addEventListener('input', function() {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                
+                resourceCards.forEach(card => {
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const description = card.querySelector('p.text-sm.text-gray-400.mb-4').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+
+            // Filter checkboxes
+            const filterCheckboxes = document.querySelectorAll('aside input[type="checkbox"]');
+            
+            filterCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', applyFilters);
+            });
+            
+            function applyFilters() {
+                // Get selected filters
+                const selectedSubjects = Array.from(document.querySelectorAll('aside div:nth-child(1) input[type="checkbox"]:checked'))
+                    .map(cb => cb.nextElementSibling.textContent.trim().toLowerCase());
+                
+                const selectedDifficulties = Array.from(document.querySelectorAll('aside div:nth-child(2) input[type="checkbox"]:checked'))
+                    .map(cb => cb.nextElementSibling.textContent.trim().toLowerCase());
+                
+                const selectedFormats = Array.from(document.querySelectorAll('aside div:nth-child(3) input[type="checkbox"]:checked'))
+                    .map(cb => cb.nextElementSibling.textContent.trim().toLowerCase());
+                
+                // Apply filters to each resource card
+                resourceCards.forEach(card => {
+                    const format = card.querySelector('.flex.items-center.justify-between.mb-2 span:first-child').textContent.trim().toLowerCase();
+                    const difficulty = card.querySelector('.flex.items-center.justify-between.mb-2 span:last-child').textContent.trim().toLowerCase();
+                    
+                    // For subject, we'll use the title as a proxy since it's not explicitly labeled
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    
+                    // Check if card matches all selected filters
+                    const matchesSubject = selectedSubjects.length === 0 || 
+                        selectedSubjects.some(subject => title.includes(subject));
+                    
+                    const matchesDifficulty = selectedDifficulties.length === 0 || 
+                        selectedDifficulties.includes(difficulty);
+                    
+                    const matchesFormat = selectedFormats.length === 0 || 
+                        selectedFormats.includes(format);
+                    
+                    // Show/hide based on filter matches
+                    if (matchesSubject && matchesDifficulty && matchesFormat) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+
+            // Bookmark buttons
+            const bookmarkButtons = document.querySelectorAll('.text-custom.hover\\:text-custom\\/80');
+            
+            bookmarkButtons.forEach((button, index) => {
+                // Check if resource is already bookmarked
+                const isBookmarked = localStorage.getItem(`bookmark_${index}`) === 'true';
+                
+                // Update icon based on bookmark status
+                if (isBookmarked) {
+                    button.innerHTML = '<i class="fas fa-bookmark"></i>';
+                }
+                
+                // Toggle bookmark on click
+                button.addEventListener('click', function() {
+                    const currentlyBookmarked = button.querySelector('i').classList.contains('fas');
+                    
+                    if (currentlyBookmarked) {
+                        button.innerHTML = '<i class="far fa-bookmark"></i>';
+                        localStorage.setItem(`bookmark_${index}`, 'false');
+                    } else {
+                        button.innerHTML = '<i class="fas fa-bookmark"></i>';
+                        localStorage.setItem(`bookmark_${index}`, 'true');
+                    }
+                });
+            });
+
+            // Action buttons (Watch Now, Read Now, Download)
+            const actionButtons = document.querySelectorAll('.!rounded-button.bg-custom.text-white.px-3.py-1\\.5.text-sm');
+            
+            actionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const action = button.textContent.trim();
+                    const resourceTitle = button.closest('.bg-gray-800').querySelector('h3').textContent;
+                    
+                    alert(`${action} for "${resourceTitle}"`);
+                });
+            });
+
+            // Add Resource button
+            document.querySelector('.fas.fa-plus').parentElement.addEventListener('click', function() {
+                alert('Add Resource feature coming soon!');
+            });
+
+            // Bookmarks button
+            document.querySelector('.far.fa-bookmark').parentElement.addEventListener('click', function() {
+                // Toggle display of only bookmarked resources
+                const showingBookmarked = this.classList.contains('active');
+                
+                if (showingBookmarked) {
+                    // Show all resources again
+                    resourceCards.forEach(card => {
+                        card.style.display = 'block';
+                    });
+                    this.classList.remove('active');
+                    this.classList.remove('bg-custom');
+                    this.classList.add('bg-gray-700');
+                } else {
+                    // Show only bookmarked resources
+                    bookmarkButtons.forEach((button, index) => {
+                        const isBookmarked = button.querySelector('i').classList.contains('fas');
+                        const card = button.closest('.bg-gray-800');
+                        
+                        if (isBookmarked) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                    this.classList.add('active');
+                    this.classList.remove('bg-gray-700');
+                    this.classList.add('bg-custom');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

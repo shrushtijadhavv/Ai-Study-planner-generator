@@ -1,0 +1,122 @@
+/* Notification Styling */
+
+/* Notification Button */
+#notificationBtn {
+    position: relative;
+    background-color: #374151; /* bg-gray-700 */
+    padding: 0.5rem; /* p-2 */
+    color: #D1D5DB; /* text-gray-300 */
+    border-radius: 0.375rem; /* rounded-md */
+    transition: all 0.3s ease;
+}
+
+#notificationBtn:hover {
+    color: #16BC88; /* hover:text-custom */
+    transform: scale(1.05);
+}
+
+#notificationBtn:focus {
+    outline: none; /* focus:outline-none */
+}
+
+/* Notification Badge */
+.notification-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    height: 0.5rem; /* h-2 */
+    width: 0.5rem; /* w-2 */
+    border-radius: 9999px; /* rounded-full */
+    background-color: #EF4444; /* bg-red-500 */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 1;
+    transform-origin: center;
+}
+
+.notification-badge.hidden {
+    opacity: 0;
+    transform: scale(0);
+}
+
+.notification-badge.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.notification-badge.fade-out {
+    animation: fadeOutBadge 0.3s forwards;
+}
+
+@keyframes fadeOutBadge {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
+#notificationBtn:hover .notification-badge {
+    transform: scale(1.2);
+    box-shadow: 0 0 5px rgba(239, 68, 68, 0.5);
+}
+
+/* Notification Panel Styles */
+#notificationPanel {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.25);
+    border: 1px solid #4B5563;
+    animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Notification Items */
+#notificationPanel .divide-y > div {
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+#notificationPanel .divide-y > div:hover {
+    background-color: #4B5563;
+}
+
+/* Notification Action Buttons */
+#notificationPanel button {
+    transition: all 0.3s ease;
+}
+
+#notificationPanel button:hover {
+    color: #16BC88;
+    transform: scale(1.1);
+}
+
+/* Notification Type Tags */
+#notificationPanel .rounded-full {
+    transition: all 0.3s ease;
+}
+
+#notificationPanel .rounded-full:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Notification Empty State */
+#notificationPanel .text-center {
+    padding: 2rem 0;
+    color: #9CA3AF;
+    transition: all 0.3s ease;
+} 
